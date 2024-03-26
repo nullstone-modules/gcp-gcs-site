@@ -1,0 +1,13 @@
+org_name: nullstone
+name: gcp-gcs-site
+friendly_name: GCS Site
+description: Creates a Nullstone static site app using Cloud Storage
+category: app
+subcategory: static-site
+provider_types:
+    - gcp
+platform: gcs
+subplatform: ""
+type: ""
+appCategories: []
+is_public: true
