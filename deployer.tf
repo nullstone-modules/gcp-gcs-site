@@ -12,4 +12,15 @@ resource "google_service_account_key" "deployer" {
   service_account_id = google_service_account.deployer.account_id
 }
 
-// TODO: Add appropriate permission to upload content, update URL maps
+resource "google_storage_bucket_iam_member" "deployer" {
+  bucket = google_storage_bucket.this.name
+  role   = "roles/storage.objectUser"
+  member = "serviceAccount:${google_service_account.deployer.email}"
+}
+
+# TODO: Add permissions for managing CDNs created via capabilities
+# resource "google_project_iam_member" "cdn" {
+#   project = local.project_id
+#   role    = "roles/compute.networkAdmin"
+#   member  = "serviceAccount:${google_service_account.deployer.email}"
+# }
