@@ -28,9 +28,9 @@ output "env_vars_filename" {
   description = "string ||| The name of the S3 Object that contains a json-encoded configuration file with environment variables."
 }
 
-output "cdn_url_map_ids" {
-  value       = local.cdn_url_map_ids
-  description = "string ||| A list of IDS for each URL map attached to a CDN."
+output "cdn_url_map_names" {
+  value       = local.cdn_url_map_names
+  description = "string ||| A list of names for each URL map attached to a CDN."
 }
 
 output "private_urls" {

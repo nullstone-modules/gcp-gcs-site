@@ -11,8 +11,8 @@ locals {
 
     cdns = [
       {
-        proxy_id   = ""
-        url_map_id = ""
+        proxy_id     = ""
+        url_map_name = ""
       }
     ]
 
