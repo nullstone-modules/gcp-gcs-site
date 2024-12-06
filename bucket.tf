@@ -19,6 +19,12 @@ resource "google_storage_bucket" "this" {
   force_destroy = true
 }
 
+resource "google_storage_bucket_iam_member" "public_access" {
+  bucket = google_storage_bucket.this.name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
+}
+
 resource "google_compute_backend_bucket" "this" {
   name                 = local.resource_name
   description          = "CDN for GCS Bucket ${local.resource_name}"
