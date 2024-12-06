@@ -15,7 +15,7 @@ variable "enable_versioned_assets" {
 }
 
 locals {
-  artifacts_key_template = var.enable_versioned_assets ? "{{app-version}}/" : ""
+  artifacts_key_template = var.enable_versioned_assets ? "/{{app-version}}/" : ""
 }
 
 variable "cors_origins" {
