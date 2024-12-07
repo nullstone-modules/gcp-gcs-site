@@ -42,3 +42,13 @@ output "public_urls" {
   value       = local.public_urls
   description = "list(string) ||| A list of URLs accessible to the public"
 }
+
+output "log_provider" {
+  value       = "cloud-logging"
+  description = "string ||| "
+}
+
+output "log_filter" {
+  value       = local.log_filter
+  description = "string ||| A log filter that can be used by a GCP client to retrieve log entries for this static site"
+}

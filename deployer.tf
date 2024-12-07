@@ -18,9 +18,25 @@ resource "google_storage_bucket_iam_member" "deployer" {
   member = "serviceAccount:${google_service_account.deployer.email}"
 }
 
-# TODO: Add permissions for managing CDNs created via capabilities
-# resource "google_project_iam_member" "cdn" {
-#   project = local.project_id
-#   role    = "roles/compute.networkAdmin"
-#   member  = "serviceAccount:${google_service_account.deployer.email}"
-# }
+resource "google_project_iam_custom_role" "cdn" {
+  role_id     = replace("${local.resource_name}-cdn", "-", "_")
+  title       = "${local.block_name} CDN"
+  description = "Limited permissions to manage CDNs"
+  stage       = "GA"
+
+  permissions = [
+    "compute.urlMaps.get",
+    "compute.urlMaps.invalidateCache",
+    "compute.urlMaps.list",
+    "compute.urlMaps.listEffectiveTags",
+    "compute.urlMaps.listTagBindings",
+    "compute.urlMaps.update",
+    "compute.backendBuckets.use",
+  ]
+}
+
+resource "google_project_iam_member" "cdn" {
+  project = local.project_id
+  role    = google_project_iam_custom_role.cdn.id
+  member  = "serviceAccount:${google_service_account.deployer.email}"
+}
