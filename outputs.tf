@@ -16,10 +16,10 @@ output "artifacts_key_template" {
 output "deployer" {
   value = {
     email       = try(google_service_account.deployer.email, "")
-    private_key = try(google_service_account_key.deployer.private_key, "")
+    impersonate = true
   }
 
-  description = "object({ email: string, private_key: string }) ||| A GCP service account with explicit privilege to deploy this GCS static site."
+  description = "object({ email: string, impersonate: bool }) ||| A GCP service account with explicit privilege to deploy this GCS static site."
   sensitive   = true
 }
 

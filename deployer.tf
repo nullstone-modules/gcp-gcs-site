@@ -8,8 +8,11 @@ resource "google_service_account" "deployer" {
   display_name = "Deployer for ${local.block_name}"
 }
 
-resource "google_service_account_key" "deployer" {
-  service_account_id = google_service_account.deployer.account_id
+// Allow Nullstone Agent to impersonate the deployer account
+resource "google_service_account_iam_binding" "deployer_nullstone_agent" {
+  service_account_id = google_service_account.deployer.id
+  role               = "roles/iam.serviceAccountTokenCreator"
+  members            = ["serviceAccount:${local.ns_agent_service_account_email}"]
 }
 
 resource "google_storage_bucket_iam_member" "deployer" {
