@@ -5,8 +5,8 @@ resource "google_storage_bucket" "this" {
   uniform_bucket_level_access = true
 
   website {
-    main_page_suffix = "index.html"
-    not_found_page   = "404.html"
+    main_page_suffix = var.default_document
+    not_found_page   = var.notfound_document
   }
 
   cors {

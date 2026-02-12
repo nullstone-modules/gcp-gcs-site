@@ -18,6 +18,18 @@ locals {
   artifacts_key_template = var.enable_versioned_assets ? "/{{app-version}}" : ""
 }
 
+variable "default_document" {
+  type        = string
+  default     = "index.html"
+  description = "When visiting the root (i.e. `/`), the user is served this document."
+}
+
+variable "notfound_document" {
+  type        = string
+  default     = "404.html"
+  description = "If a file is not found, the user is shown this page instead."
+}
+
 variable "cors_origins" {
   type        = list(string)
   default     = ["*"]
