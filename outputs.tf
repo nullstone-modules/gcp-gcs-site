@@ -3,14 +3,19 @@ output "project_id" {
   description = "string ||| The Google Cloud project ID for this workspace."
 }
 
+output "artifacts_bucket_id" {
+  value       = "projects/${local.project_id}/buckets/${google_storage_bucket.this.name}"
+  description = "string ||| The ID of the created GCS bucket. (Format: projects/{projectId}/buckets/{bucketName})"
+}
+
 output "artifacts_bucket_name" {
   value       = google_storage_bucket.this.name
-  description = "string ||| The name of the created S3 bucket."
+  description = "string ||| The name of the created GCS bucket."
 }
 
 output "artifacts_key_template" {
   value       = local.artifacts_key_template
-  description = "string ||| Template for s3 directory where files are placed."
+  description = "string ||| Template for GCS directory where files are placed."
 }
 
 output "deployer" {
