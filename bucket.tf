@@ -4,6 +4,10 @@ resource "google_storage_bucket" "this" {
   storage_class               = "MULTI_REGIONAL"
   uniform_bucket_level_access = true
 
+  hierarchical_namespace {
+    enabled = true
+  }
+
   website {
     main_page_suffix = var.default_document
     not_found_page   = var.notfound_document

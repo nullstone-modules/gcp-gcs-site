@@ -4,8 +4,8 @@ output "project_id" {
 }
 
 output "artifacts_bucket_id" {
-  value       = "projects/${local.project_id}/buckets/${google_storage_bucket.this.name}"
-  description = "string ||| The ID of the created GCS bucket. (Format: projects/{projectId}/buckets/{bucketName})"
+  value       = "projects/_/buckets/${google_storage_bucket.this.name}"
+  description = "string ||| The ID of the created GCS bucket. (Format: projects/_/buckets/{bucketName})"
 }
 
 output "artifacts_bucket_name" {

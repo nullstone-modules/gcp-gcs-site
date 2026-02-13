@@ -15,9 +15,15 @@ resource "google_service_account_iam_binding" "deployer_nullstone_agent" {
   members            = ["serviceAccount:${local.ns_agent_service_account_email}"]
 }
 
-resource "google_storage_bucket_iam_member" "deployer" {
+resource "google_storage_bucket_iam_member" "deployer_bucket_admin" {
   bucket = google_storage_bucket.this.name
-  role   = "roles/storage.objectUser"
+  role   = "roles/storage.objectAdmin"
+  member = "serviceAccount:${google_service_account.deployer.email}"
+}
+
+resource "google_storage_bucket_iam_member" "deployer_bucket_folder_admin" {
+  bucket = google_storage_bucket.this.name
+  role   = "roles/storage.folderAdmin"
   member = "serviceAccount:${google_service_account.deployer.email}"
 }
 
