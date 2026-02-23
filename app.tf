@@ -16,5 +16,7 @@ locals {
     backend_id             = google_compute_backend_bucket.this.id
     artifacts_key_template = local.artifacts_key_template
     deployer_email         = google_service_account.deployer.email
+    default_document       = var.default_document
+    notfound_document      = var.notfound_document
   })
 }
