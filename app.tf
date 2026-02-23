@@ -15,5 +15,6 @@ locals {
     gcs_bucket_name        = google_storage_bucket.this.name
     backend_id             = google_compute_backend_bucket.this.id
     artifacts_key_template = local.artifacts_key_template
+    deployer_email         = google_service_account.deployer.email
   })
 }
