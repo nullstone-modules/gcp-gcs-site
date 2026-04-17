@@ -4,6 +4,10 @@ resource "google_storage_bucket" "this" {
   storage_class               = "MULTI_REGIONAL"
   uniform_bucket_level_access = true
 
+  soft_delete_policy {
+    retention_duration_seconds = 0
+  }
+
   hierarchical_namespace {
     enabled = true
   }
