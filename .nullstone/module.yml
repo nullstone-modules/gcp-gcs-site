@@ -4,6 +4,7 @@ friendly_name: GCS Site
 description: Creates a Nullstone static site app using Cloud Storage
 category: app
 subcategory: static-site
+app_type: generic
 provider_types:
     - gcp
 platform: gcs
