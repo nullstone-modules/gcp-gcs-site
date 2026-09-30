@@ -18,17 +18,23 @@ locals {
     NULLSTONE_PUBLIC_HOSTS  = join(",", local.public_hosts)
     NULLSTONE_PRIVATE_HOSTS = join(",", local.private_hosts)
   })
-
-  input_env_vars = merge(local.standard_env_vars, local.cap_env_vars, var.env_vars)
 }
 
-data "ns_env_variables" "this" {
-  input_env_variables = local.input_env_vars
-  input_secrets       = {}
+data "ns_env_values" "this" {
+  platform            = "gcp_gcs"
+  standard            = local.standard_env_vars
+  capability_env      = local.cap_env
+  capability_prefixes = local.cap_prefixes
+  user_env            = var.env_vars
+}
+
+// ns_env_platform_data records the environment so Nullstone can display it
+data "ns_env_platform_data" "this" {
+  values = data.ns_env_values.this.platform_data
 }
 
 locals {
-  all_env_vars = data.ns_env_variables.this.env_variables
+  all_env_vars = data.ns_env_values.this.env_variables
 }
 
 resource "google_storage_bucket_object" "env_file" {
