@@ -35,6 +35,18 @@ locals {
     ]
   }
 
-  cap_env_vars = {}
-  cap_secrets  = {}
+  // cap_prefixes is a map indexed by capability name which points to the env_prefix of each capability
+  cap_prefixes = tomap({
+    x = ""
+  })
+
+  cap_env = [
+    {
+      capability = "x"
+      name       = "EXAMPLE_ENV"
+      value      = ""
+    }
+  ]
+
+  cap_secrets = {}
 }
